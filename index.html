@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haven Brew Coffee - Welcome</title>
+    <style>
+        .menu-tab.active {
+            background: #6e4b2a !important;
+            color: #fff !important;
+        }
+        .menu-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .menu-card {
+            background:#fff;
+            border-radius:16px;
+            box-shadow:0 4px 16px rgba(44,62,80,0.12);
+            padding:18px;
+            width:240px;
+            min-height:370px;
+            margin:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            transition:transform 0.3s, box-shadow 0.3s;
+            position:relative;
+            overflow:hidden;
+            animation: fadeInUp 0.7s;
+        }
+        .order-form {
+            display:none;
+        }
+        .menu-card.active .order-form {
+            display:block;
+            animation:fadeInDown 0.7s;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .menu-card {
+            background:#fff;
+            border-radius:16px;
+            box-shadow:0 4px 16px rgba(44,62,80,0.12);
+            padding:18px;
+            width:230px;
+            margin-bottom:18px;
+            transition:transform 0.3s, box-shadow 0.3s;
+            position:relative;
+            overflow:hidden;
+            animation: fadeInUp 0.7s;
+        }
+        .menu-card:hover {
+            transform:scale(1.04) translateY(-6px);
+            box-shadow:0 8px 32px rgba(44,62,80,0.18);
+        }
+        .menu-card img {
+            width:100%;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(44,62,80,0.10);
+            margin-bottom:10px;
+            transition:transform 0.3s;
+        }
+        .menu-card:hover img {
+            transform:scale(1.08);
+        }
+        .menu-card h4 {
+            margin:8px 0 4px 0;
+            font-size:1.15em;
+        }
+        .menu-card p {
+            margin:4px 0 8px 0;
+        }
+        .order-form {
+            background:#f7f3ee;
+            border-radius:10px;
+            padding:10px 8px;
+            margin-top:8px;
+            box-shadow:0 2px 8px rgba(44,62,80,0.07);
+            font-size:0.97em;
+            animation: fadeInDown 0.7s;
+        }
+        .order-form label {
+            display:block;
+            margin-bottom:6px;
+        }
+        .order-form input[type="number"],
+        .order-form select {
+            border-radius:5px;
+            border:1px solid #c49a6c;
+            padding:3px 8px;
+            margin-left:4px;
+            margin-bottom:4px;
+            font-size:1em;
+        }
+        .order-form input[type="checkbox"] {
+            accent-color:#c49a6c;
+        }
+        .order-form button {
+            background:#c49a6c;
+            color:#fff;
+            border:none;
+            padding:7px 18px;
+            border-radius:7px;
+            cursor:pointer;
+            font-weight:bold;
+            font-size:1em;
+            box-shadow:0 2px 8px rgba(44,62,80,0.10);
+            transition:background 0.2s, transform 0.2s;
+        }
+        .order-form button:active {
+            background:#a0522d;
+            transform:scale(0.96);
+        }
+        .order-form .added {
+            background:#6e4b2a !important;
+            color:#fff !important;
+        }
+        <nav style="background:#eee;padding:10px 0;text-align:center;">
+            <a href="#home" style="margin:0 15px;">Home</a>
+            <a href="#menu" style="margin:0 15px;">Menu</a>
+            <a href="#about" style="margin:0 15px;">About</a>
+        </nav>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f7f3ee 60%, #e7d9c4 100%);
+        }
+        header {
+            background: linear-gradient(90deg, #6e4b2a 60%, #bfa77a 100%);
+            color: #fff;
+            padding: 40px 0 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(110,75,42,0.12);
+            letter-spacing: 1px;
+        }
+        .logo-img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(110,75,42,0.10);
+            background: #fff;
+        }
+        nav {
+            background: #8d6e4a;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(110,75,42,0.07);
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #e7d9c4;
+        }
+        .hero {
+            background: linear-gradient(90deg, #bfa77a 60%, #f7f3ee 100%);
+            color: #6e4b2a;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.2s;
+        }
+        .interactive-btn {
+            background: #bfa77a;
+            color: #6e4b2a;
+            padding: 14px 36px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(110,75,42,0.10);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+            outline: none;
+        }
+        .interactive-btn:hover {
+            background: #6e4b2a;
+            color: #fff;
+            transform: scale(1.08);
+        }
+        .interactive-btn:active {
+            background: #8d6e4a;
+            color: #fff;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .feature {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(110,75,42,0.10);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .feature:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(110,75,42,0.18);
+        }
+        footer {
+            background: #6e4b2a;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 8px rgba(110,75,42,0.07);
+        }
+        @media (max-width: 800px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head> 
+<body>
+    <header>
+    <img src="c:\Users\delos\OneDrive\Desktop\business\Picture1.png" alt="Cafe Aroma Logo" class="logo-img" style="display:block;margin:0 auto 16px auto;margin-top:24px;">
+    <h1 style="margin-top:0;">Haven Brew Coffee</h1>
+    <p>Deserve mo to, tara kape tayo!</p>
+    </header>
+    <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    </nav>
+    <section class="hero">
+    <h2>Welcome to Haven Brew Coffee </h2>
+    <p>Discover the perfect blend of coffee, pastries, and relaxation in our cozy café. Your daily escape awaits!</p>
+    <a href="#menu" class="interactive-btn">Order Now</a>
+    </section>
+    <section class="features">
+        <div class="feature">
+            <h3>Signature Coffee</h3>
+            <p>Enjoy our expertly brewed coffees, from classic espresso to unique seasonal blends.</p>
+        </div>
+        <div class="feature">
+            <h3>Fresh Pastries</h3>
+            <p>Indulge in daily-baked pastries, cakes, and savory treats made with local ingredients.</p>
+        </div>
+        <div class="feature">
+            <h3>Relaxing Ambience</h3>
+            <p>Unwind in our warm, inviting space—perfect for work, meetings, or catching up with friends.</p>
+        </div>
+    </section>
+    <!-- Home Section -->
+    <section id="home" style="background:#fff8f0;padding:40px 0;text-align:center;">
+        <h2>Our StorAromay</h2>
+        <p>Café Aroma was founded with a passion for bringing people together over great coffee and delicious food. Our team is dedicated to creating a welcoming space for everyone in the community.</p>
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Cafe interior" style="max-width:400px;width:100%;border-radius:12px;margin:20px 0;box-shadow:0 2px 8px rgba(44,62,80,0.10);">
+    </section>
+    <!-- Menu Section -->
+    <section id="menu" style="background:#e0eafc;padding:40px 0;text-align:center;">
+        <h2>Menu Selections</h2>
+        <!-- Menu Tab Navigation -->
+        <div id="menu-tabs" style="margin-bottom:32px;text-align:center;">
+            <button type="button" class="menu-tab active" data-tab="coffee">Coffee</button>
+            <button type="button" class="menu-tab" data-tab="noncoffee">Non-Coffee</button>
+            <button type="button" class="menu-tab" data-tab="pastries">Pastries</button>
+        </div>
+        <div style="max-width:1200px;margin:0 auto;text-align:left;">
+            <!-- Coffee Section -->
+            <h3 id="coffee-section" style="margin-top:40px;color:#c49a6c;">Coffees</h3>
+            <div class="menu-section">
+                <!-- 10 Coffee items -->
+                <div style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.10);padding:16px;width:220px;">
+                    <div class="menu-card">
+                        <img src="c:\Users\delos\OneDrive\Desktop\business\OIP (13).jpg" alt="Latte">
+                        <h4>Latte</h4>
+                        <p style="color:#c49a6c;font-weight:bold;">₱130</p>
+                        <p>Creamy espresso with steamed milk.</p>
+                        <form class="order-form">
+                            <label>Qty: <input type="number" min="1" value="1"></label>
+                            <label><input type="checkbox"> Extra shot</label>
+                            <label>Syrup:
+                                <select>
+                                    <option value="none">None</option>
+                                    <option value="vanilla">Vanilla</option>
+                                    <!-- 10 Coffee items -->
+                                    <div class="menu-card">
+                                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80" alt="Latte">
+                                        <h4>Latte</h4>
+                                        <p style="color:#c49a6c;font-weight:bold;">₱130</p>
+                                        <p>Creamy espresso with steamed milk.</p>
+                                        <form class="order-form">
+                                            <label>Qty: <input type="number" min="1" value="1"></label>
+                                            <label><input type="checkbox"> Extra shot</label>
+                                            <label>Syrup:
+                                                <select>
+                                                    <option value="none">None</option>
+                                                    <option value="vanilla">Vanilla</option>
+                                                    <option value="caramel">Caramel</option>
+                                                    <option value="hazelnut">Hazelnut</option>
+                                                </select>
+                                            </label>
+                                            <label>Milk:
+                                                <select>
+                                                    <option value="regular">Regular</option>
+                                                    <option value="skim">Skim</option>
+                                                    <option value="soy">Soy</option>
+                                                    <option value="almond">Almond</option>
+                                                </select>
+                                            </label>
+                                            <label>Payment:
+                                                <select>
+                                                    <option value="cash">Cash</option>
+                                                    <option value="card">Card</option>
+                                                </select>
+                                            </label>
+                                            <button type="button" class="add-cart-btn">Add to Cart</button>
+                                        </form>
+                                    </div>
+                                    <div class="menu-card">
+                                        <img src="c:\Users\delos\OneDrive\Desktop\business\wp3631939.jpg" alt="Cappuccino">
+                                        <h4>Cappuccino</h4>
+                                        <p style="color:#c49a6c;font-weight:bold;">₱125</p>
+                                        <p>Espresso, steamed milk, and foam.</p>
+                                            <form class="order-form">
+                                                <label>Qty: <input type="number" min="1" value="1"></label>
+                                                <label><input type="checkbox"> Extra shot</label>
+                                                <label>Syrup:
+                                                    <select>
+                                                        <option value="none">None</option>
+                                                        <option value="vanilla">Vanilla</option>
+                                                        <option value="caramel">Caramel</option>
+                                                        <option value="hazelnut">Hazelnut</option>
+                                                    </select>
+                                                </label>
+                                                <label>Milk:
+                                                    <select>
+                                                        <option value="regular">Regular</option>
+                                                        <option value="skim">Skim</option>
+                                                        <option value="soy">Soy</option>
+                                                        <option value="almond">Almond</option>
+                                                    </select>
+                                                </label>
+                                                <label>Payment:
+                                                    <select>
+                                                        <option value="cash">Cash</option>
+                                                        <option value="card">Card</option>
+                                                    </select>
+                                                </label>
+                                                <button type="button" class="add-cart-btn">Add to Cart</button>
+                                            </form>
+                                    </div>
+                                    <div class="menu-card">
+                                        <img src="c:\Users\delos\OneDrive\Desktop\business\Partners-Americano-FT-BLOG0523-b8e18cc340574cc9bed536cceeec7082.jpg" alt="Americano">
+                                        <h4>Americano</h4>
+                                        <p style="color:#c49a6c;font-weight:bold;">₱110</p>
+                                        <p>Espresso with hot water.</p>
+                                        <form class="order-form">
+                                            <label>Qty: <input type="number" min="1" value="1"></label>
+                                            <label><input type="checkbox"> Extra shot</label>
+                                            <label>Syrup:
+                                                <select>
+                                                    <option value="none">None</option>
+                                                    <option value="vanilla">Vanilla</option>
+                                                    <option value="caramel">Caramel</option>
+                                                    <option value="hazelnut">Hazelnut</option>
+                                                </select>
+                                            </label>
+                                            <label>Milk:
+                                                <select>
+                                                    <option value="regular">Regular</option>
+                                                    <option value="skim">Skim</option>
+                                                    <option value="soy">Soy</option>
+                                                    <option value="almond">Almond</option>
+                                                </select>
+                                            </label>
+                                            <label>Payment:
+                                                <select>
+                                                    <option value="cash">Cash</option>
+                                                    <option value="card">Card</option>
+                                                </select>
+                                            </label>
+                                            <button type="button" class="add-cart-btn">Add to Cart</button>
+                                        </form>
+                                    </div>
+                                    <!-- Repeat for all other coffee, non-coffee, and pastry products listed in the menu section, wrapping each in .menu-card and adding the same order form structure. -->
+                    <h4>Caramel Macchiato</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱145</p>
+                    <p>Espresso, caramel, and milk.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1527515637460-1c7c1c7a7b8b?auto=format&fit=crop&w=400&q=80" alt="Flat White">
+                    <h4>Flat White</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱135</p>
+                    <p>Espresso and velvety milk.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Espresso">
+                    <h4>Espresso</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱100</p>
+                    <p>Strong and bold shot of coffee.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Affogato">
+                    <h4>Affogato</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱150</p>
+                    <p>Espresso poured over vanilla ice cream.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.10);padding:16px;width:220px;">
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Irish Coffee">
+                    <h4>Irish Coffee</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱160</p>
+                    <p>Coffee, Irish whiskey, sugar, and cream.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div style="background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.10);padding:16px;width:220px;">
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Cold Brew">
+                    <h4>Cold Brew</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱120</p>
+                    <p>Slow-steeped cold coffee.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label><input type="checkbox"> Extra shot</label>
+                        <label>Syrup:
+                            <select>
+                                <option value="none">None</option>
+                                <option value="vanilla">Vanilla</option>
+                                <option value="caramel">Caramel</option>
+                                <option value="hazelnut">Hazelnut</option>
+                            </select>
+                        </label>
+                        <label>Milk:
+                            <select>
+                                <option value="regular">Regular</option>
+                                <option value="skim">Skim</option>
+                                <option value="soy">Soy</option>
+                                <option value="almond">Almond</option>
+                            </select>
+                        </label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <h3 style="margin-top:40px;color:#c49a6c;">Non-Coffee Drinks</h3>
+            <!-- Non-Coffee Section -->
+            <h3 id="noncoffee-section" style="margin-top:40px;color:#c49a6c;">Non-Coffee Drinks</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:24px;">
+                <!-- 10 Non-coffee items with interactive forms -->
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Hot Chocolate">
+                    <h4>Hot Chocolate</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱110</p>
+                    <p>Rich and creamy chocolate drink.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101178521-c1a6f3b3a1c1?auto=format&fit=crop&w=400&q=80" alt="Matcha Latte">
+                    <h4>Matcha Latte</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱130</p>
+                    <p>Japanese green tea with milk.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Chai Latte">
+                    <h4>Chai Latte</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱125</p>
+                    <p>Spiced tea with steamed milk.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Iced Tea">
+                    <h4>Iced Tea</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱90</p>
+                    <p>Refreshing cold tea with lemon.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Milkshake">
+                    <h4>Milkshake</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱140</p>
+                    <p>Classic vanilla, chocolate, or strawberry.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Fruit Smoothie">
+                    <h4>Fruit Smoothie</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱135</p>
+                    <p>Mixed fruits blended with yogurt.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101178521-c1a6f3b3a1c1?auto=format&fit=crop&w=400&q=80" alt="Lemonade">
+                    <h4>Lemonade</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱95</p>
+                    <p>Freshly squeezed lemon drink.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Hot Tea">
+                    <h4>Hot Tea</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱80</p>
+                    <p>Assorted herbal and classic teas.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Soda">
+                    <h4>Soda</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱70</p>
+                    <p>Classic carbonated drinks.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <h3 style="margin-top:40px;color:#c49a6c;">Pastries</h3>
+            <!-- Pastries Section -->
+            <h3 id="pastries-section" style="margin-top:40px;color:#c49a6c;">Pastries</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:24px;">
+                <!-- 10 Pastry items with simple interactive forms -->
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Croissant">
+                    <h4>Croissant</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱75</p>
+                    <p>Buttery, flaky French pastry.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101178521-c1a6f3b3a1c1?auto=format&fit=crop&w=400&q=80" alt="Danish">
+                    <h4>Danish</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱85</p>
+                    <p>Sweet pastry with fruit or cheese.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Muffin">
+                    <h4>Muffin</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱65</p>
+                    <p>Soft and moist, available in flavors.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80" alt="Scone">
+                    <h4>Scone</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱70</p>
+                    <p>Classic British pastry, perfect with tea.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Cinnamon Roll">
+                    <h4>Cinnamon Roll</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱90</p>
+                    <p>Sweet roll with cinnamon and icing.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Brownie">
+                    <h4>Brownie</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱80</p>
+                    <p>Rich chocolate square, fudgy and moist.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" alt="Cheesecake">
+                    <h4>Cheesecake</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱120</p>
+                    <p>Creamy dessert with a graham crust.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Eclair">
+                    <h4>Eclair</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱95</p>
+                    <p>French pastry filled with cream.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Macaron">
+                    <h4>Macaron</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱100</p>
+                    <p>Colorful almond meringue cookies.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="menu-card">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Apple Pie">
+                    <h4>Apple Pie</h4>
+                    <p style="color:#c49a6c;font-weight:bold;">₱110</p>
+                    <p>Classic pie with spiced apples.</p>
+                    <form class="order-form">
+                        <label>Qty: <input type="number" min="1" value="1"></label>
+                        <label>Payment:
+                            <select>
+                                <option value="cash">Cash</option>
+                                <option value="card">Card</option>
+                            </select>
+                        </label>
+                        <button type="button" class="add-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+            <!-- Coffee Section -->
+            <div id="coffee-section" class="menu-category" style="display:block;">
+                <h3 style="margin-top:40px;color:#c49a6c;">Coffees</h3>
+                <div class="menu-section">
+                    <!-- Coffee items only -->
+                    ...existing code for coffee products...
+                </div>
+            </div>
+            <!-- Non-Coffee Section -->
+            <div id="noncoffee-section" class="menu-category" style="display:none;">
+                <h3 style="margin-top:40px;color:#c49a6c;">Non-Coffee Drinks</h3>
+                <div class="menu-section">
+                    <!-- Non-coffee items only -->
+                    ...existing code for non-coffee products...
+                </div>
+            </div>
+            <!-- Pastries Section -->
+            <div id="pastries-section" class="menu-category" style="display:none;">
+                <h3 style="margin-top:40px;color:#c49a6c;">Pastries</h3>
+                <div class="menu-section">
+                    <!-- Pastry items only -->
+                    ...existing code for pastry products...
+                </div>
+            </div>
+        </div>
+            <input type="email" id="email" name="email" style="width:100%;padding:8px;margin-bottom:12px;border-radius:5px;border:1px solid #ccc;"><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" style="width:100%;padding:8px;border-radius:5px;border:1px solid #ccc;"></textarea><br>
+            <button type="submit" class="interactive-btn" style="margin-top:12px;">Send</button>
+        </form>
+    </section>
+    <footer>
+    &copy; 2025 Café Aroma. All rights reserved.
+    </footer>
+</body>
+    <script>
+       
+        document.querySelectorAll('.add-cart-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                btn.classList.add('added');
+                btn.textContent = 'Added!';
+                setTimeout(function() {
+                    btn.classList.remove('added');
+                    btn.textContent = 'Add to Cart';
+                }, 1200);
+            });
+        });
+
+    
+        document.querySelectorAll('.menu-card').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+              
+                if (e.target.closest('.order-form')) return;
+              
+                document.querySelectorAll('.menu-card.active').forEach(function(activeCard) {
+                    activeCard.classList.remove('active');
+                });
+               
+                card.classList.add('active');
+            });
+        });
+
+        // Tab functionality for menu sections
+        document.addEventListener('DOMContentLoaded', function() {
+            function showMenuTab(tabName) {
+                // Hide all categories
+                document.querySelectorAll('.menu-category').forEach(function(cat) {
+                    cat.style.display = 'none';
+                });
+                // Remove active class from all tabs
+                document.querySelectorAll('.menu-tab').forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                // Show selected category and set active tab
+                document.getElementById(tabName + '-section').style.display = 'block';
+                document.querySelector('.menu-tab[data-tab="' + tabName + '"]').classList.add('active');
+            }
+            document.querySelectorAll('.menu-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var selected = tab.getAttribute('data-tab');
+                    showMenuTab(selected);
+                });
+            });
+            // Ensure only coffee is shown on page load
+            showMenuTab('coffee');
+        });
+    </script>
+</html>
